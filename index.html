@@ -1,0 +1,3117 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#f7f8fc">
+<meta name="description" content="Memories of high school life — simpan cerita, kenangan, dan perjalanan hidupmu.">
+<title>Memories of high school life</title>
+
+<style>
+:root{
+  --bg:#f6f7fb;
+  --surface:#ffffff;
+  --surface2:#f0f2f8;
+  --text:#20263a;
+  --muted:#858ba1;
+  --primary:#6878ed;
+  --primary2:#8794ff;
+  --border:#e8eaf2;
+  --green:#4cae91;
+  --yellow:#e5b45d;
+  --red:#e57983;
+  --shadow:0 12px 35px rgba(39,48,92,.06);
+  --radius:22px;
+}
+
+body.dark{
+  --bg:#111522;
+  --surface:#1a2030;
+  --surface2:#242b3e;
+  --text:#f0f2ff;
+  --muted:#a1a9c2;
+  --primary:#909aff;
+  --primary2:#737ff3;
+  --border:#30374c;
+  --shadow:0 12px 35px rgba(0,0,0,.18);
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-size:14px;
+  line-height:1.6;
+  transition:background .25s,color .25s;
+}
+
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{
+  outline:2px solid var(--primary);
+  outline-offset:3px;
+}
+
+button:disabled{opacity:.5;cursor:not-allowed}
+
+.app{
+  min-height:100vh;
+  display:grid;
+  grid-template-columns:250px minmax(0,1fr);
+}
+
+.sidebar{
+  position:sticky;
+  top:0;
+  height:100vh;
+  background:var(--surface);
+  border-right:1px solid var(--border);
+  padding:27px 18px;
+  display:flex;
+  flex-direction:column;
+  z-index:10;
+}
+
+.brand{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  padding:0 8px 32px;
+}
+
+.brand-logo{
+  width:43px;
+  height:43px;
+  display:grid;
+  place-items:center;
+  border-radius:15px;
+  color:white;
+  background:linear-gradient(140deg,#8290ff,#5968df);
+  font-size:23px;
+  box-shadow:0 7px 18px #6878ed35;
+}
+
+.brand h2{
+  font-size:15px;
+  margin:0;
+  line-height:1.4;
+  letter-spacing:-.3px;
+}
+
+.brand small{
+  color:var(--muted);
+  font-size:11px;
+}
+
+.nav-label{
+  padding:8px 12px;
+  margin:3px 0 9px;
+  color:var(--muted);
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:1.6px;
+  text-transform:uppercase;
+}
+
+.nav{
+  display:grid;
+  gap:5px;
+}
+
+.nav button{
+  border:0;
+  background:transparent;
+  color:var(--muted);
+  display:flex;
+  align-items:center;
+  gap:13px;
+  text-align:left;
+  padding:12px 13px;
+  border-radius:13px;
+  font-weight:600;
+  transition:.2s;
+}
+
+.nav button:hover{
+  background:var(--surface2);
+  color:var(--text);
+}
+
+.nav button.active{
+  background:linear-gradient(100deg,#6978ee,#8792ff);
+  color:white;
+  box-shadow:0 8px 20px #6878ed25;
+}
+
+.nav-icon{
+  font-size:19px;
+  width:23px;
+  text-align:center;
+}
+
+.sidebar-bottom{
+  margin-top:auto;
+}
+
+.quote-card{
+  background:linear-gradient(145deg,#edf0ff,#f9edff);
+  color:#525b9d;
+  padding:18px;
+  border-radius:18px;
+  margin:20px 3px;
+}
+
+body.dark .quote-card{
+  background:linear-gradient(145deg,#292d4b,#342941);
+  color:#d1d2ff;
+}
+
+.quote-card .quote{
+  font-family:Georgia,serif;
+  font-size:15px;
+  font-style:italic;
+  line-height:1.7;
+}
+
+.quote-card small{
+  display:block;
+  margin-top:10px;
+  opacity:.75;
+}
+
+.sidebar-footer{
+  color:var(--muted);
+  font-size:11px;
+  text-align:center;
+}
+
+.main{
+  min-width:0;
+  padding:28px 36px 60px;
+  max-width:1600px;
+  width:100%;
+  margin:0 auto;
+}
+
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  margin-bottom:30px;
+}
+
+.breadcrumb{
+  color:var(--muted);
+  font-size:12px;
+  margin-bottom:3px;
+}
+
+.page-title{
+  margin:0;
+  font-size:26px;
+  line-height:1.3;
+  letter-spacing:-.8px;
+}
+
+.top-actions{
+  display:flex;
+  align-items:center;
+  gap:9px;
+}
+
+.icon-btn{
+  width:43px;
+  height:43px;
+  border:1px solid var(--border);
+  border-radius:14px;
+  background:var(--surface);
+  color:var(--text);
+  font-size:18px;
+}
+
+.primary-btn{
+  display:inline-flex;
+  justify-content:center;
+  align-items:center;
+  gap:8px;
+  background:var(--primary);
+  color:white;
+  border:0;
+  border-radius:13px;
+  padding:12px 17px;
+  font-weight:700;
+  box-shadow:0 5px 15px #6878ed22;
+  transition:transform .2s,opacity .2s;
+}
+
+.primary-btn:hover{transform:translateY(-2px)}
+
+.secondary-btn{
+  display:inline-flex;
+  justify-content:center;
+  align-items:center;
+  gap:7px;
+  padding:10px 14px;
+  background:var(--surface);
+  color:var(--text);
+  border:1px solid var(--border);
+  border-radius:12px;
+  font-weight:600;
+}
+
+.danger-btn{
+  background:#fff0f1;
+  color:#d84c61;
+  border:1px solid #f8d8dd;
+  padding:10px 14px;
+  border-radius:12px;
+  font-weight:600;
+}
+
+body.dark .danger-btn{
+  background:#40242e;
+  border-color:#55303b;
+  color:#ff9baa;
+}
+
+.section{display:none}
+.section.active{display:block}
+
+.hero{
+  position:relative;
+  overflow:hidden;
+  padding:32px;
+  border-radius:26px;
+  color:white;
+  background:linear-gradient(115deg,#6474e8 0%,#8a94f6 58%,#b1a3f4 100%);
+  box-shadow:0 16px 35px #6878ed25;
+  margin-bottom:25px;
+}
+
+.hero:after{
+  content:"";
+  position:absolute;
+  width:260px;
+  height:260px;
+  border:1px solid #ffffff28;
+  border-radius:50%;
+  right:-70px;
+  top:-110px;
+  box-shadow:0 0 0 28px #ffffff0b,0 0 0 60px #ffffff08;
+}
+
+.hero-content{
+  position:relative;
+  z-index:1;
+  max-width:550px;
+}
+
+.hero-tag{
+  display:inline-block;
+  border:1px solid #ffffff55;
+  background:#ffffff18;
+  padding:5px 10px;
+  border-radius:30px;
+  font-size:11px;
+  margin-bottom:13px;
+}
+
+.hero h2{
+  font-size:clamp(25px,3vw,36px);
+  line-height:1.25;
+  letter-spacing:-1px;
+  margin:0 0 12px;
+}
+
+.hero p{
+  max-width:440px;
+  opacity:.9;
+  margin:0 0 21px;
+  font-size:13px;
+}
+
+.hero .primary-btn{
+  background:white;
+  color:#626fe1;
+}
+
+.hero-date{
+  font-size:12px;
+  opacity:.85;
+  margin-top:20px;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:15px;
+  margin-bottom:27px;
+}
+
+.stat-card{
+  padding:20px;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:19px;
+  box-shadow:var(--shadow);
+  min-width:0;
+}
+
+.stat-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:5px;
+  margin-bottom:13px;
+}
+
+.stat-icon{
+  width:39px;
+  height:39px;
+  display:grid;
+  place-items:center;
+  border-radius:13px;
+  font-size:19px;
+  background:#edf0ff;
+}
+
+.stat-icon.green{background:#e7f7f0}
+.stat-icon.yellow{background:#fff5df}
+.stat-icon.pink{background:#ffedf0}
+
+.stat-label{
+  color:var(--muted);
+  font-size:11px;
+  font-weight:600;
+}
+
+.stat-number{
+  font-size:29px;
+  font-weight:800;
+  letter-spacing:-1px;
+  line-height:1.3;
+}
+
+.stat-caption{
+  color:var(--muted);
+  font-size:11px;
+  margin-top:4px;
+}
+
+.dashboard-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1.4fr) minmax(280px,1fr);
+  gap:22px;
+  align-items:start;
+}
+
+.panel{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:21px;
+  padding:22px;
+  box-shadow:var(--shadow);
+  min-width:0;
+  margin-bottom:22px;
+}
+
+.panel-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:20px;
+}
+
+.panel-header h3{
+  font-size:16px;
+  margin:0;
+  letter-spacing:-.3px;
+}
+
+.panel-header p{
+  color:var(--muted);
+  font-size:11px;
+  margin:4px 0 0;
+}
+
+.text-btn{
+  background:none;
+  border:0;
+  color:var(--primary);
+  font-size:12px;
+  font-weight:700;
+  white-space:nowrap;
+}
+
+.memory-list,.task-list{
+  display:grid;
+  gap:12px;
+}
+
+.memory-item{
+  display:flex;
+  gap:14px;
+  align-items:flex-start;
+  padding:14px;
+  border:1px solid var(--border);
+  border-radius:16px;
+  transition:background .2s;
+  min-width:0;
+}
+
+.memory-item:hover{background:var(--surface2)}
+
+.memory-thumb{
+  width:64px;
+  height:64px;
+  border-radius:14px;
+  flex-shrink:0;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(140deg,#e6eaff,#f9e8f8);
+  font-size:27px;
+  overflow:hidden;
+}
+
+.memory-thumb img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.memory-content{
+  min-width:0;
+  flex:1;
+}
+
+.memory-content h4{
+  margin:0 0 4px;
+  font-size:14px;
+  overflow-wrap:anywhere;
+}
+
+.memory-content p{
+  margin:0;
+  font-size:12px;
+  color:var(--muted);
+  overflow-wrap:anywhere;
+}
+
+.memory-meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:9px;
+  color:var(--muted);
+  font-size:10px;
+}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  padding:4px 8px;
+  background:var(--surface2);
+  border-radius:30px;
+  color:var(--muted);
+  font-size:10px;
+  font-weight:700;
+}
+
+.badge.purple{background:#efedff;color:#7367d9}
+.badge.green{background:#e5f7ef;color:#349d79}
+.badge.yellow{background:#fff4dc;color:#b88629}
+.badge.red{background:#ffedf0;color:#d45c73}
+
+body.dark .badge.purple{background:#322e52;color:#c0b8ff}
+body.dark .badge.green{background:#203d37;color:#8bd6b8}
+body.dark .badge.yellow{background:#443a29;color:#efd08c}
+body.dark .badge.red{background:#432934;color:#ffadbd}
+
+.task-item{
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+  padding:12px 0;
+  border-bottom:1px solid var(--border);
+}
+
+.task-item:last-child{border-bottom:0;padding-bottom:0}
+
+.task-check{
+  appearance:none;
+  width:20px;
+  height:20px;
+  border:2px solid #cfd3e2;
+  border-radius:7px;
+  flex-shrink:0;
+  margin:2px 0 0;
+  cursor:pointer;
+}
+
+.task-check:checked{
+  background:var(--primary);
+  border-color:var(--primary);
+}
+
+.task-check:checked:after{
+  content:"✓";
+  display:block;
+  color:white;
+  font-size:13px;
+  text-align:center;
+  line-height:16px;
+}
+
+.task-body{flex:1;min-width:0}
+.task-body h4{margin:0;font-size:13px;overflow-wrap:anywhere}
+.task-body p{margin:3px 0 0;font-size:11px;color:var(--muted)}
+.task-item.done .task-body h4{
+  text-decoration:line-through;
+  opacity:.55;
+}
+
+.empty{
+  text-align:center;
+  padding:28px 12px;
+  color:var(--muted);
+}
+
+.empty-icon{
+  font-size:34px;
+  margin-bottom:9px;
+}
+
+.empty h4{color:var(--text);margin:0 0 5px}
+.empty p{font-size:12px;margin:0 0 14px}
+
+.toolbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-bottom:20px;
+}
+
+.search-box{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:13px;
+  padding:0 13px;
+  flex:1;
+  max-width:390px;
+  min-width:180px;
+}
+
+.search-box input{
+  background:transparent;
+  color:var(--text);
+  border:0;
+  outline:none;
+  width:100%;
+  min-width:0;
+  padding:12px 0;
+}
+
+.filters{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+.filters select,.field input,.field textarea,.field select{
+  width:100%;
+  padding:12px;
+  border:1px solid var(--border);
+  border-radius:12px;
+  background:var(--surface);
+  color:var(--text);
+}
+
+.filters select{
+  width:auto;
+  max-width:170px;
+}
+
+.memory-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:17px;
+}
+
+.memory-card{
+  overflow:hidden;
+  border-radius:20px;
+  background:var(--surface);
+  border:1px solid var(--border);
+  box-shadow:var(--shadow);
+  min-width:0;
+}
+
+.memory-cover{
+  height:150px;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(135deg,#e3e8ff,#f5e8fa);
+  font-size:45px;
+  position:relative;
+  overflow:hidden;
+}
+
+.memory-cover img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.memory-cover .favorite{
+  position:absolute;
+  top:12px;
+  right:12px;
+  background:#ffffffdf;
+  border:0;
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  font-size:17px;
+}
+
+.memory-card-body{padding:17px}
+.memory-card-body h3{margin:0 0 7px;font-size:15px;overflow-wrap:anywhere}
+.memory-card-body p{
+  color:var(--muted);
+  font-size:12px;
+  margin:0;
+  overflow-wrap:anywhere;
+  white-space:pre-wrap;
+}
+.memory-card-footer{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:8px;
+  margin-top:15px;
+  padding-top:12px;
+  border-top:1px solid var(--border);
+  color:var(--muted);
+  font-size:10px;
+}
+.memory-actions{display:flex;gap:7px}
+.small-action{
+  border:0;
+  background:var(--surface2);
+  color:var(--text);
+  padding:7px 9px;
+  border-radius:9px;
+  font-size:11px;
+}
+
+.todo-progress{
+  background:var(--surface2);
+  height:8px;
+  border-radius:10px;
+  overflow:hidden;
+  margin:12px 0 6px;
+}
+
+.todo-progress div{
+  height:100%;
+  width:0;
+  background:linear-gradient(90deg,#6677ee,#9c9eff);
+  border-radius:10px;
+  transition:width .3s;
+}
+
+.progress-label{
+  display:flex;
+  justify-content:space-between;
+  color:var(--muted);
+  font-size:11px;
+}
+
+.todo-filters{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-bottom:18px;
+}
+
+.todo-filters button{
+  border:1px solid var(--border);
+  background:var(--surface);
+  color:var(--muted);
+  border-radius:10px;
+  padding:9px 13px;
+  font-size:12px;
+}
+
+.todo-filters button.active{
+  background:var(--primary);
+  color:white;
+  border-color:var(--primary);
+}
+
+.calendar-panel{padding:22px}
+
+.calendar-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:22px;
+}
+
+.calendar-head h3{margin:0;font-size:18px}
+
+.calendar-grid{
+  display:grid;
+  grid-template-columns:repeat(7,minmax(0,1fr));
+  gap:6px;
+}
+
+.calendar-day-name{
+  text-align:center;
+  color:var(--muted);
+  font-size:10px;
+  font-weight:800;
+  padding:7px 0;
+}
+
+.calendar-day{
+  position:relative;
+  min-height:67px;
+  border:1px solid transparent;
+  background:var(--surface2);
+  color:var(--text);
+  border-radius:12px;
+  padding:8px 3px;
+  font-size:12px;
+}
+
+.calendar-day:hover{border-color:var(--primary)}
+.calendar-day.muted{opacity:.3}
+.calendar-day.today{border-color:var(--primary)}
+.calendar-day.selected{background:var(--primary);color:white}
+.calendar-day.has-memory:after{
+  content:"";
+  position:absolute;
+  bottom:6px;
+  left:50%;
+  transform:translateX(-50%);
+  width:5px;
+  height:5px;
+  border-radius:50%;
+  background:var(--green);
+}
+.calendar-day.selected.has-memory:after{background:white}
+
+.calendar-result{margin-top:24px}
+.calendar-result h4{margin:0 0 12px}
+
+.capsule-card{
+  background:linear-gradient(140deg,#29345c,#6258a7);
+  color:white;
+  padding:26px;
+  border-radius:22px;
+  margin-bottom:20px;
+}
+
+.capsule-card h2{margin:0 0 8px;font-size:25px}
+.capsule-card p{max-width:560px;color:#e1e3ff;font-size:13px}
+.capsule-card .primary-btn{background:white;color:#554fa0}
+
+.settings-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:17px;
+}
+
+.setting-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  padding:14px 0;
+  border-bottom:1px solid var(--border);
+}
+
+.setting-row:last-child{border-bottom:0}
+.setting-row h4{margin:0;font-size:13px}
+.setting-row p{margin:4px 0 0;color:var(--muted);font-size:11px}
+
+.field{margin-bottom:16px}
+.field label{
+  display:block;
+  margin-bottom:7px;
+  font-size:12px;
+  font-weight:700;
+}
+.field textarea{min-height:115px;resize:vertical}
+.field small{display:block;color:var(--muted);font-size:11px;margin-top:5px}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:0 14px;
+}
+
+.full{grid-column:1/-1}
+
+.modal-backdrop{
+  position:fixed;
+  inset:0;
+  background:#10152b80;
+  backdrop-filter:blur(7px);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+  z-index:100;
+}
+
+.modal-backdrop.open{display:flex}
+
+.modal{
+  width:min(560px,100%);
+  max-height:90vh;
+  overflow:auto;
+  background:var(--surface);
+  color:var(--text);
+  border:1px solid var(--border);
+  border-radius:23px;
+  padding:25px;
+  box-shadow:0 30px 90px #0002;
+}
+
+.modal-header{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:22px;
+}
+
+.modal-header h2{margin:0;font-size:21px}
+.modal-header p{margin:5px 0 0;color:var(--muted);font-size:12px}
+
+.close-btn{
+  border:0;
+  background:var(--surface2);
+  color:var(--text);
+  border-radius:10px;
+  width:35px;
+  height:35px;
+  font-size:20px;
+}
+
+.modal-actions{
+  display:flex;
+  justify-content:flex-end;
+  gap:9px;
+  flex-wrap:wrap;
+  margin-top:20px;
+}
+
+.toast{
+  position:fixed;
+  bottom:24px;
+  left:50%;
+  transform:translate(-50%,20px);
+  background:#252c43;
+  color:white;
+  border-radius:13px;
+  padding:12px 18px;
+  font-size:12px;
+  box-shadow:0 10px 30px #0002;
+  z-index:200;
+  opacity:0;
+  pointer-events:none;
+  transition:.25s;
+  max-width:calc(100vw - 32px);
+  text-align:center;
+}
+
+.toast.show{
+  opacity:1;
+  transform:translate(-50%,0);
+}
+
+.lock-screen{
+  position:fixed;
+  inset:0;
+  z-index:500;
+  background:var(--bg);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:22px;
+}
+
+.lock-screen.hidden{display:none}
+
+.lock-box{
+  width:min(420px,100%);
+  text-align:center;
+  background:var(--surface);
+  border:1px solid var(--border);
+  padding:30px;
+  border-radius:26px;
+  box-shadow:var(--shadow);
+}
+
+.lock-logo{
+  width:70px;
+  height:70px;
+  border-radius:23px;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(135deg,#6979ef,#a09aff);
+  color:white;
+  font-size:32px;
+  margin:0 auto 20px;
+}
+
+.lock-box h1{font-size:24px;line-height:1.3;margin:0 0 10px}
+.lock-box p{font-size:12px;color:var(--muted);margin:0 0 20px}
+.lock-box input{
+  display:block;
+  width:100%;
+  padding:14px;
+  text-align:center;
+  letter-spacing:6px;
+  font-size:20px;
+  border:1px solid var(--border);
+  border-radius:13px;
+  background:var(--bg);
+  color:var(--text);
+  margin-bottom:12px;
+}
+
+.lock-box .primary-btn{width:100%}
+.lock-message{color:var(--red)!important;margin-top:12px!important}
+
+.mobile-menu{display:none}
+
+.detail-content{
+  font-size:13px;
+  line-height:1.9;
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+}
+
+.detail-photo{
+  width:100%;
+  max-height:320px;
+  object-fit:cover;
+  border-radius:15px;
+  margin-bottom:16px;
+}
+
+.muted{color:var(--muted)}
+
+@media(max-width:1100px){
+  .main{padding:25px 22px 50px}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .dashboard-grid{grid-template-columns:1fr}
+}
+
+@media(max-width:760px){
+  .app{display:block}
+  .sidebar{
+    position:fixed;
+    top:0;
+    left:-280px;
+    width:260px;
+    transition:left .25s;
+    box-shadow:none;
+  }
+  .sidebar.open{
+    left:0;
+    box-shadow:0 0 0 100vmax #10152b70;
+  }
+  .main{padding:20px 15px 45px}
+  .topbar{margin-bottom:22px}
+  .page-title{font-size:22px}
+  .mobile-menu{display:inline-grid;place-items:center}
+  .top-actions .desktop-add{display:none}
+  .hero{padding:24px 21px;border-radius:22px}
+  .hero h2{font-size:28px}
+  .stat-card{padding:15px}
+  .stat-number{font-size:25px}
+  .memory-grid{grid-template-columns:1fr}
+  .memory-cover{height:175px}
+  .settings-grid{grid-template-columns:1fr}
+  .panel{padding:17px}
+  .calendar-panel{padding:12px}
+  .calendar-grid{gap:3px}
+  .calendar-day{min-height:48px;border-radius:8px;font-size:11px}
+  .calendar-day-name{font-size:9px}
+  .form-grid{grid-template-columns:1fr}
+  .full{grid-column:auto}
+  .toolbar{align-items:stretch}
+  .search-box{max-width:none}
+  .filters select{max-width:100%}
+  .calendar-head h3{font-size:15px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  *,*:before,*:after{transition:none!important;scroll-behavior:auto!important}
+}
+</style>
+</head>
+
+<body>
+
+<div id="lockScreen" class="lock-screen">
+  <div class="lock-box">
+    <div class="lock-logo">♡</div>
+    <h1>Memories of<br>high school life</h1>
+    <p id="lockDescription">Tempat menyimpan cerita yang ingin kamu kenang selamanya.</p>
+    <form id="unlockForm">
+      <input id="pinInput" type="password" inputmode="numeric"
+        pattern="[0-9]*" maxlength="64" autocomplete="off"
+        placeholder="Masukkan PIN" aria-label="PIN">
+      <button class="primary-btn" type="submit" id="unlockButton">Buka Kenangan →</button>
+    </form>
+    <p id="lockMessage" class="lock-message" hidden></p>
+    <p style="margin-top:18px;font-size:10px">
+      Kenanganmu adalah bagian dari perjalananmu. Jaga cadangannya baik-baik.
+    </p>
+  </div>
+</div>
+
+<div class="app" id="app" hidden>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="brand-logo">♡</div>
+      <div>
+        <h2>Memories of<br>high school life</h2>
+        <small>Your story, your memories.</small>
+      </div>
+    </div>
+
+    <div class="nav-label">Workspace</div>
+    <nav class="nav">
+      <button class="active" data-page="dashboard">
+        <span class="nav-icon">⌂</span> Dashboard
+      </button>
+      <button data-page="memories">
+        <span class="nav-icon">♡</span> My Memories
+      </button>
+      <button data-page="tasks">
+        <span class="nav-icon">☑</span> Daily Tasks
+      </button>
+      <button data-page="calendar">
+        <span class="nav-icon">▦</span> Memory Calendar
+      </button>
+      <button data-page="capsule">
+        <span class="nav-icon">✉</span> Time Capsule
+      </button>
+    </nav>
+
+    <div class="nav-label" style="margin-top:25px">Personal</div>
+    <nav class="nav">
+      <button data-page="settings">
+        <span class="nav-icon">⚙</span> Settings & Backup
+      </button>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <div class="quote-card">
+        <div style="font-size:24px;margin-bottom:5px">✧</div>
+        <div class="quote">"Some moments become memories before we even realize they matter."</div>
+        <small>— A little reminder</small>
+      </div>
+      <div class="sidebar-footer">Made for your future self ♡</div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div style="display:flex;align-items:center;gap:12px;min-width:0">
+        <button class="icon-btn mobile-menu" id="menuButton" aria-label="Buka menu">☰</button>
+        <div>
+          <div class="breadcrumb" id="breadcrumb">Your personal space / Overview</div>
+          <h1 class="page-title" id="pageTitle">Good to see you again ✨</h1>
+        </div>
+      </div>
+      <div class="top-actions">
+        <button class="icon-btn" id="themeButton" aria-label="Ganti tema">☾</button>
+        <button class="primary-btn desktop-add" id="quickAdd">＋ New Memory</button>
+      </div>
+    </header>
+
+    <!-- DASHBOARD -->
+    <section class="section active" id="page-dashboard">
+      <div class="hero">
+        <div class="hero-content">
+          <span class="hero-tag">✦ YOUR PERSONAL TIME MACHINE</span>
+          <h2>Your story is made<br>of little moments.</h2>
+          <p>
+            Suatu hari nanti, kamu mungkin akan merindukan hari-hari
+            yang sekarang terasa biasa. Simpan ceritanya, satu hari
+            demi satu hari.
+          </p>
+          <button class="primary-btn" id="heroAdd">＋ Save today's memory</button>
+          <div class="hero-date" id="heroDate"></div>
+        </div>
+      </div>
+
+      <div class="stats">
+        <div class="stat-card">
+          <div class="stat-top">
+            <span class="stat-label">Total Memories</span>
+            <span class="stat-icon">♡</span>
+          </div>
+          <div class="stat-number" id="statMemories">0</div>
+          <div class="stat-caption">Stories worth remembering</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-top">
+            <span class="stat-label">Tasks Completed</span>
+            <span class="stat-icon green">✓</span>
+          </div>
+          <div class="stat-number" id="statCompleted">0</div>
+          <div class="stat-caption">Small steps matter</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-top">
+            <span class="stat-label">Tasks To Do</span>
+            <span class="stat-icon yellow">◷</span>
+          </div>
+          <div class="stat-number" id="statPending">0</div>
+          <div class="stat-caption">One step at a time</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-top">
+            <span class="stat-label">Time Capsules</span>
+            <span class="stat-icon pink">✉</span>
+          </div>
+          <div class="stat-number" id="statCapsules">0</div>
+          <div class="stat-caption">Letters to future you</div>
+        </div>
+      </div>
+
+      <div class="dashboard-grid">
+        <div class="panel">
+          <div class="panel-header">
+            <div>
+              <h3>Recent Memories ♡</h3>
+              <p>Your latest moments, kept in one place.</p>
+            </div>
+            <button class="text-btn" data-go="memories">View all →</button>
+          </div>
+          <div class="memory-list" id="recentMemories"></div>
+        </div>
+
+        <div>
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <h3>Today's Tasks</h3>
+                <p>Make today count, little by little.</p>
+              </div>
+              <button class="text-btn" data-go="tasks">View all →</button>
+            </div>
+            <div id="dashboardTasks"></div>
+            <div style="margin-top:18px">
+              <button class="secondary-btn" style="width:100%" id="dashboardAddTask">＋ Add a task</button>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header">
+              <div>
+                <h3>A Note to Yourself</h3>
+                <p>A little thought for today.</p>
+              </div>
+              <span style="font-size:21px">✧</span>
+            </div>
+            <p style="font-family:Georgia,serif;font-size:15px;line-height:1.8;margin:0">
+              You don't have to make every day extraordinary. Sometimes,
+              simply living through an ordinary day is a story worth keeping.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MEMORIES -->
+    <section class="section" id="page-memories">
+      <div class="toolbar">
+        <div class="search-box">
+          <span>⌕</span>
+          <input id="memorySearch" type="search" placeholder="Search your memories...">
+        </div>
+        <div class="filters">
+          <select id="memoryCategoryFilter" aria-label="Filter kategori">
+            <option value="">All categories</option>
+            <option value="School">School</option>
+            <option value="Friends">Friends</option>
+            <option value="Family">Family</option>
+            <option value="Achievement">Achievement</option>
+            <option value="Personal">Personal</option>
+            <option value="Other">Other</option>
+          </select>
+          <button class="primary-btn" id="addMemoryButton">＋ Add Memory</button>
+        </div>
+      </div>
+      <div class="memory-grid" id="allMemories"></div>
+    </section>
+
+    <!-- TASKS -->
+    <section class="section" id="page-tasks">
+      <div class="panel">
+        <div class="panel-header">
+          <div>
+            <h3>Your Daily Progress</h3>
+            <p>Every little step is still progress.</p>
+          </div>
+          <button class="primary-btn" id="addTaskButton">＋ Add Task</button>
+        </div>
+        <div class="progress-label">
+          <span>Overall completion</span>
+          <span id="progressText">0%</span>
+        </div>
+        <div class="todo-progress"><div id="progressBar"></div></div>
+      </div>
+      <div class="todo-filters" id="taskFilters">
+        <button class="active" data-filter="all">All tasks</button>
+        <button data-filter="today">Today</button>
+        <button data-filter="pending">Pending</button>
+        <button data-filter="done">Completed</button>
+      </div>
+      <div class="panel">
+        <div class="panel-header">
+          <div>
+            <h3>Your Tasks</h3>
+            <p id="taskCountText">Your plans, all in one place.</p>
+          </div>
+        </div>
+        <div id="allTasks" class="task-list"></div>
+      </div>
+    </section>
+
+    <!-- CALENDAR -->
+    <section class="section" id="page-calendar">
+      <div class="panel calendar-panel">
+        <div class="calendar-head">
+          <button class="icon-btn" id="prevMonth" aria-label="Bulan sebelumnya">‹</button>
+          <h3 id="calendarTitle"></h3>
+          <button class="icon-btn" id="nextMonth" aria-label="Bulan berikutnya">›</button>
+        </div>
+        <div class="calendar-grid" id="calendarGrid"></div>
+        <p class="muted" style="font-size:11px;margin-top:16px">
+          Titik kecil menandakan tanggal yang memiliki kenangan.
+          Pilih tanggal untuk melihat ceritanya.
+        </p>
+      </div>
+      <div class="panel calendar-result">
+        <div class="panel-header">
+          <div>
+            <h3 id="selectedDateTitle">Memories on this day</h3>
+            <p>Every date has a story.</p>
+          </div>
+          <button class="secondary-btn" id="addCalendarMemory">＋ Add Memory</button>
+        </div>
+        <div id="calendarMemories"></div>
+      </div>
+    </section>
+
+    <!-- TIME CAPSULE -->
+    <section class="section" id="page-capsule">
+      <div class="capsule-card">
+        <div style="font-size:33px">✉</div>
+        <h2>A letter to your future self.</h2>
+        <p>
+          Tulis harapanmu, ceritakan siapa dirimu hari ini, atau simpan
+          sesuatu yang ingin kamu baca lagi beberapa tahun mendatang.
+          Kamu bisa membukanya ketika tanggal yang kamu pilih tiba.
+        </p>
+        <button class="primary-btn" id="addCapsuleButton">＋ Write a letter</button>
+      </div>
+      <div class="panel">
+        <div class="panel-header">
+          <div>
+            <h3>Your Time Capsules</h3>
+            <p>Letters waiting for the right moment.</p>
+          </div>
+        </div>
+        <div id="allCapsules"></div>
+      </div>
+    </section>
+
+    <!-- SETTINGS -->
+    <section class="section" id="page-settings">
+      <div class="settings-grid">
+        <div class="panel">
+          <div class="panel-header">
+            <div>
+              <h3>Appearance</h3>
+              <p>Make this space feel like yours.</p>
+            </div>
+            <span style="font-size:22px">◐</span>
+          </div>
+          <div class="setting-row">
+            <div>
+              <h4>Dark Mode</h4>
+              <p>Switch between light and dark themes.</p>
+            </div>
+            <button class="secondary-btn" id="settingsTheme">Change</button>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header">
+            <div>
+              <h3>Privacy & Security</h3>
+              <p>Keep your personal stories protected.</p>
+            </div>
+            <span style="font-size:22px">♧</span>
+          </div>
+          <div class="setting-row">
+            <div>
+              <h4>Change PIN</h4>
+              <p>Update your private access code.</p>
+            </div>
+            <button class="secondary-btn" id="changePinButton">Change PIN</button>
+          </div>
+          <div class="setting-row">
+            <div>
+              <h4>Lock Website</h4>
+              <p>Lock your memories when you're away.</p>
+            </div>
+            <button class="secondary-btn" id="lockButton">Lock now</button>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header">
+            <div>
+              <h3>Backup & Restore</h3>
+              <p>Protect your memories against data loss.</p>
+            </div>
+            <span style="font-size:22px">▣</span>
+          </div>
+          <p class="muted" style="font-size:12px">
+            Buat cadangan terenkripsi secara berkala. Simpan berkasnya
+            di tempat yang aman. PIN diperlukan untuk memulihkannya.
+          </p>
+          <div style="display:grid;gap:10px;margin-top:17px">
+            <button class="primary-btn" id="exportButton">↓ Export encrypted backup</button>
+            <button class="secondary-btn" id="importButton">↑ Restore from backup</button>
+            <input id="importFile" type="file" accept=".json,application/json" hidden>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-header">
+            <div>
+              <h3>About Your Data</h3>
+              <p>Understand how your memories are stored.</p>
+            </div>
+            <span style="font-size:22px">♡</span>
+          </div>
+          <div class="setting-row">
+            <div>
+              <h4>Storage</h4>
+              <p>Encrypted local browser database.</p>
+            </div>
+            <span class="badge green">Local</span>
+          </div>
+          <div class="setting-row">
+            <div>
+              <h4>Cloud Sync</h4>
+              <p>Cross-device synchronization is not configured.</p>
+            </div>
+            <span class="badge yellow">Not connected</span>
+          </div>
+          <div class="setting-row">
+            <div>
+              <h4>Data expiration</h4>
+              <p>The app has no automatic expiration date.</p>
+            </div>
+            <span class="badge green">No expiry</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3 style="margin-top:0">A little reminder ♡</h3>
+        <p class="muted" style="font-size:12px;line-height:1.9">
+          Your memories are stored on this device, encrypted using your PIN.
+          Clearing browser data, losing access to the device, or browser
+          storage failure may result in data loss. Keep encrypted backups
+          somewhere safe. This website does not automatically upload your
+          data to the internet.
+        </p>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- MEMORY MODAL -->
+<div class="modal-backdrop" id="memoryModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <h2 id="memoryModalTitle">Save a Memory ♡</h2>
+        <p>A moment today, a story for tomorrow.</p>
+      </div>
+      <button class="close-btn" data-close="memoryModal" aria-label="Tutup">×</button>
+    </div>
+    <form id="memoryForm">
+      <input id="memoryId" type="hidden">
+      <div class="field">
+        <label for="memoryTitle">Memory title *</label>
+        <input id="memoryTitle" maxlength="120" required
+          placeholder="A day I'll never forget...">
+      </div>
+      <div class="form-grid">
+        <div class="field">
+          <label for="memoryDate">Date *</label>
+          <input id="memoryDate" type="date" required>
+        </div>
+        <div class="field">
+          <label for="memoryCategory">Category</label>
+          <select id="memoryCategory">
+            <option>School</option>
+            <option>Friends</option>
+            <option>Family</option>
+            <option>Achievement</option>
+            <option>Personal</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="memoryMood">How did you feel?</label>
+          <select id="memoryMood">
+            <option value="😊">😊 Happy</option>
+            <option value="🥰">🥰 Loved</option>
+            <option value="😌">😌 Peaceful</option>
+            <option value="🥹">🥹 Emotional</option>
+            <option value="😔">😔 Sad</option>
+            <option value="😤">😤 Frustrated</option>
+            <option value="😎">😎 Proud</option>
+            <option value="🤍">🤍 Grateful</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="memoryPhoto">Photo (optional)</label>
+          <input id="memoryPhoto" type="file" accept="image/*">
+          <small>Gambar disimpan dalam data terenkripsi. Gunakan foto yang tidak terlalu besar.</small>
+        </div>
+      </div>
+      <div class="field">
+        <label for="memoryStory">Your story *</label>
+        <textarea id="memoryStory" required maxlength="30000"
+          placeholder="Apa yang terjadi hari ini? Siapa yang bersamamu? Mengapa momen ini berarti?"></textarea>
+      </div>
+      <div class="field">
+        <label for="memoryTags">Tags (optional)</label>
+        <input id="memoryTags" maxlength="300"
+          placeholder="best friend, school trip, funny moment">
+      </div>
+      <div class="field">
+        <label style="display:flex;align-items:center;gap:9px">
+          <input id="memoryFavorite" type="checkbox" style="width:auto">
+          Mark as a favorite memory ♡
+        </label>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="secondary-btn" data-close="memoryModal">Cancel</button>
+        <button type="submit" class="primary-btn">Save Memory ♡</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- TASK MODAL -->
+<div class="modal-backdrop" id="taskModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <h2 id="taskModalTitle">Add a Task</h2>
+        <p>Make a little plan for your day.</p>
+      </div>
+      <button class="close-btn" data-close="taskModal" aria-label="Tutup">×</button>
+    </div>
+    <form id="taskForm">
+      <input id="taskId" type="hidden">
+      <div class="field">
+        <label for="taskTitle">Task name *</label>
+        <input id="taskTitle" required maxlength="200"
+          placeholder="Finish homework, read a book...">
+      </div>
+      <div class="form-grid">
+        <div class="field">
+          <label for="taskDate">Due date *</label>
+          <input id="taskDate" type="date" required>
+        </div>
+        <div class="field">
+          <label for="taskPriority">Priority</label>
+          <select id="taskPriority">
+            <option value="Normal">Normal</option>
+            <option value="High">High</option>
+            <option value="Low">Low</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label for="taskNotes">Notes (optional)</label>
+        <textarea id="taskNotes" maxlength="5000"
+          placeholder="Additional details..."></textarea>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="secondary-btn" data-close="taskModal">Cancel</button>
+        <button type="submit" class="primary-btn">Save Task ✓</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- CAPSULE MODAL -->
+<div class="modal-backdrop" id="capsuleModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <h2>Dear Future Me ✉</h2>
+        <p>Write a letter for a future chapter of your life.</p>
+      </div>
+      <button class="close-btn" data-close="capsuleModal" aria-label="Tutup">×</button>
+    </div>
+    <form id="capsuleForm">
+      <input id="capsuleId" type="hidden">
+      <div class="field">
+        <label for="capsuleTitle">Letter title *</label>
+        <input id="capsuleTitle" maxlength="120" required
+          placeholder="To the person I'll become...">
+      </div>
+      <div class="field">
+        <label for="capsuleDate">Open on or after *</label>
+        <input id="capsuleDate" type="date" required>
+        <small>Website ini tidak mengirim notifikasi otomatis. Kamu bisa membuka suratnya setelah tanggal tersebut.</small>
+      </div>
+      <div class="field">
+        <label for="capsuleStory">Your letter *</label>
+        <textarea id="capsuleStory" maxlength="30000" required
+          placeholder="Dear future me..."></textarea>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="secondary-btn" data-close="capsuleModal">Cancel</button>
+        <button type="submit" class="primary-btn">Save Letter ✉</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- DETAIL MODAL -->
+<div class="modal-backdrop" id="detailModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <h2 id="detailTitle">Memory</h2>
+        <p id="detailMeta"></p>
+      </div>
+      <button class="close-btn" data-close="detailModal" aria-label="Tutup">×</button>
+    </div>
+    <div id="detailBody"></div>
+    <div class="modal-actions">
+      <button class="secondary-btn" data-close="detailModal">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- PIN MODAL -->
+<div class="modal-backdrop" id="pinModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <h2>Change your PIN 🔐</h2>
+        <p>Your data will be re-encrypted using your new PIN.</p>
+      </div>
+      <button class="close-btn" data-close="pinModal" aria-label="Tutup">×</button>
+    </div>
+    <form id="pinForm">
+      <div class="field">
+        <label for="oldPin">Current PIN</label>
+        <input id="oldPin" type="password" inputmode="numeric"
+          autocomplete="current-password" required>
+      </div>
+      <div class="field">
+        <label for="newPin">New PIN (minimum 6 digits)</label>
+        <input id="newPin" type="password" inputmode="numeric"
+          autocomplete="new-password" pattern="[0-9]{6,}" minlength="6" required>
+      </div>
+      <div class="field">
+        <label for="confirmPin">Confirm new PIN</label>
+        <input id="confirmPin" type="password" inputmode="numeric"
+          autocomplete="new-password" pattern="[0-9]{6,}" minlength="6" required>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="secondary-btn" data-close="pinModal">Cancel</button>
+        <button type="submit" class="primary-btn">Update PIN</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<script>
+"use strict";
+
+/* ======================================================
+   MEMORIES OF HIGH SCHOOL LIFE
+   Encrypted local storage using Web Crypto + IndexedDB.
+   No external libraries, accounts, or server required.
+====================================================== */
+
+const $ = id => document.getElementById(id);
+
+const DB_NAME = "memories_high_school_db";
+const DB_VERSION = 1;
+const STORE_NAME = "vault";
+const VAULT_KEY = "main";
+const APP_VERSION = 1;
+
+let db = null;
+let masterKey = null;
+let appData = null;
+let selectedPage = "dashboard";
+let taskFilter = "all";
+let calendarMonth = new Date();
+let selectedCalendarDate = today();
+let toastTimer = null;
+let saving = Promise.resolve();
+
+const pageNames = {
+  dashboard: ["Your personal space / Overview", "Good to see you again ✨"],
+  memories: ["Your personal space / Memories", "My Memories ♡"],
+  tasks: ["Your personal space / Productivity", "Daily Tasks ✓"],
+  calendar: ["Your personal space / Timeline", "Memory Calendar"],
+  capsule: ["Your personal space / Future", "Time Capsule ✉"],
+  settings: ["Your personal space / Preferences", "Settings & Backup"]
+};
+
+function today(){
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+}
+
+function uid(){
+  return crypto.randomUUID
+    ? crypto.randomUUID()
+    : Date.now().toString(36) + Math.random().toString(36).slice(2);
+}
+
+function esc(value){
+  return String(value ?? "").replace(/[&<>"']/g, c => ({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#39;"
+  })[c]);
+}
+
+function formatDate(date){
+  if(!date) return "No date";
+  const d = new Date(date + "T12:00:00");
+  if(Number.isNaN(d.getTime())) return date;
+  return new Intl.DateTimeFormat("id-ID",{
+    day:"numeric",month:"long",year:"numeric"
+  }).format(d);
+}
+
+function formatMonth(date){
+  return new Intl.DateTimeFormat("id-ID",{
+    month:"long",year:"numeric"
+  }).format(date);
+}
+
+function toast(message){
+  $("toast").textContent = message;
+  $("toast").classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>$("toast").classList.remove("show"),3000);
+}
+
+function openModal(id){
+  $(id).classList.add("open");
+  document.body.style.overflow="hidden";
+}
+
+function closeModal(id){
+  $(id).classList.remove("open");
+  if(!document.querySelector(".modal-backdrop.open")){
+    document.body.style.overflow="";
+  }
+}
+
+function openDB(){
+  return new Promise((resolve,reject)=>{
+    if(!("indexedDB" in window)){
+      reject(new Error("Browser tidak mendukung IndexedDB."));
+      return;
+    }
+
+    const request = indexedDB.open(DB_NAME,DB_VERSION);
+
+    request.onupgradeneeded = ()=>{
+      const database = request.result;
+      if(!database.objectStoreNames.contains(STORE_NAME)){
+        database.createObjectStore(STORE_NAME,{keyPath:"id"});
+      }
+    };
+
+    request.onsuccess = ()=>resolve(request.result);
+    request.onerror = ()=>reject(request.error);
+  });
+}
+
+function readVault(){
+  return new Promise((resolve,reject)=>{
+    const tx = db.transaction(STORE_NAME,"readonly");
+    const request = tx.objectStore(STORE_NAME).get(VAULT_KEY);
+    request.onsuccess = ()=>resolve(request.result || null);
+    request.onerror = ()=>reject(request.error);
+  });
+}
+
+function writeVault(value){
+  return new Promise((resolve,reject)=>{
+    const tx = db.transaction(STORE_NAME,"readwrite");
+    tx.objectStore(STORE_NAME).put(value);
+    tx.oncomplete = ()=>resolve();
+    tx.onerror = ()=>reject(tx.error);
+    tx.onabort = ()=>reject(tx.error || new Error("Penyimpanan dibatalkan."));
+  });
+}
+
+function deleteVault(){
+  return new Promise((resolve,reject)=>{
+    const tx = db.transaction(STORE_NAME,"readwrite");
+    tx.objectStore(STORE_NAME).delete(VAULT_KEY);
+    tx.oncomplete = ()=>resolve();
+    tx.onerror = ()=>reject(tx.error);
+  });
+}
+
+function bytesToBase64(bytes){
+  let binary="";
+  const chunk=0x8000;
+  for(let i=0;i<bytes.length;i+=chunk){
+    binary+=String.fromCharCode(...bytes.subarray(i,i+chunk));
+  }
+  return btoa(binary);
+}
+
+function base64ToBytes(value){
+  const binary=atob(value);
+  const out=new Uint8Array(binary.length);
+  for(let i=0;i<binary.length;i++) out[i]=binary.charCodeAt(i);
+  return out;
+}
+
+function randomBytes(length){
+  return crypto.getRandomValues(new Uint8Array(length));
+}
+
+async function deriveKey(pin,salt){
+  const material=await crypto.subtle.importKey(
+    "raw",
+    new TextEncoder().encode(pin),
+    "PBKDF2",
+    false,
+    ["deriveKey"]
+  );
+
+  return crypto.subtle.deriveKey(
+    {
+      name:"PBKDF2",
+      salt,
+      iterations:310000,
+      hash:"SHA-256"
+    },
+    material,
+    {name:"AES-GCM",length:256},
+    false,
+    ["encrypt","decrypt"]
+  );
+}
+
+async function encryptData(data,key=masterKey){
+  const iv=randomBytes(12);
+  const plain=new TextEncoder().encode(JSON.stringify(data));
+  const cipher=await crypto.subtle.encrypt(
+    {name:"AES-GCM",iv},
+    key,
+    plain
+  );
+
+  return {
+    version:APP_VERSION,
+    algorithm:"AES-GCM",
+    iv:bytesToBase64(iv),
+    ciphertext:bytesToBase64(new Uint8Array(cipher))
+  };
+}
+
+async function decryptData(record,key=masterKey){
+  if(!record || record.algorithm!=="AES-GCM"){
+    throw new Error("Format data tidak dikenali.");
+  }
+
+  const cipher=base64ToBytes(record.ciphertext);
+  const iv=base64ToBytes(record.iv);
+
+  const plain=await crypto.subtle.decrypt(
+    {name:"AES-GCM",iv},
+    key,
+    cipher
+  );
+
+  return JSON.parse(new TextDecoder().decode(plain));
+}
+
+async function createInitialVault(pin){
+  const salt=randomBytes(16);
+  const key=await deriveKey(pin,salt);
+
+  const data={
+    version:APP_VERSION,
+    createdAt:new Date().toISOString(),
+    memories:[],
+    tasks:[],
+    capsules:[],
+    settings:{theme:"light"}
+  };
+
+  const encrypted=await encryptData(data,key);
+
+  await writeVault({
+    id:VAULT_KEY,
+    salt:bytesToBase64(salt),
+    encrypted,
+    updatedAt:new Date().toISOString()
+  });
+
+  masterKey=key;
+  appData=data;
+}
+
+async function unlockVault(pin){
+  const record=await readVault();
+  if(!record) return false;
+
+  const salt=base64ToBytes(record.salt);
+  const key=await deriveKey(pin,salt);
+
+  try{
+    const data=await decryptData(record.encrypted,key);
+
+    if(!data || !Array.isArray(data.memories) ||
+       !Array.isArray(data.tasks) ||
+       !Array.isArray(data.capsules)){
+      throw new Error("Data tidak valid.");
+    }
+
+    masterKey=key;
+    appData=data;
+
+    if(!appData.settings) appData.settings={theme:"light"};
+    if(!appData.createdAt) appData.createdAt=new Date().toISOString();
+
+    return true;
+  }catch(error){
+    return false;
+  }
+}
+
+function persist(){
+  if(!appData || !masterKey) return Promise.resolve();
+
+  saving=saving.then(async()=>{
+    const encrypted=await encryptData(appData);
+    await writeVault({
+      id:VAULT_KEY,
+      salt:currentSalt,
+      encrypted,
+      updatedAt:new Date().toISOString()
+    });
+  });
+
+  return saving;
+}
+
+let currentSalt="";
+
+async function saveNow(){
+  try{
+    await persist();
+    return true;
+  }catch(error){
+    console.error(error);
+    toast("Gagal menyimpan data. Segera ekspor cadangan.");
+    return false;
+  }
+}
+
+function showApp(){
+  $("lockScreen").classList.add("hidden");
+  $("app").hidden=false;
+
+  document.body.classList.toggle(
+    "dark",
+    appData.settings.theme==="dark"
+  );
+
+  updateThemeButton();
+  renderAll();
+}
+
+function lockApp(){
+  masterKey=null;
+  appData=null;
+
+  $("app").hidden=true;
+  $("lockScreen").classList.remove("hidden");
+  $("pinInput").value="";
+  $("lockMessage").hidden=true;
+  $("unlockButton").textContent="Buka Kenangan →";
+  $("lockDescription").textContent="Masukkan PIN untuk membuka kenanganmu.";
+
+  document.body.style.overflow="";
+}
+
+function updateThemeButton(){
+  $("themeButton").textContent =
+    document.body.classList.contains("dark") ? "☀" : "☾";
+}
+
+function switchPage(page){
+  if(!pageNames[page]) return;
+
+  selectedPage=page;
+
+  document.querySelectorAll(".section").forEach(section=>{
+    section.classList.remove("active");
+  });
+
+  $("page-"+page).classList.add("active");
+
+  document.querySelectorAll(".nav button").forEach(button=>{
+    button.classList.toggle("active",button.dataset.page===page);
+  });
+
+  $("breadcrumb").textContent=pageNames[page][0];
+  $("pageTitle").textContent=pageNames[page][1];
+
+  $("sidebar").classList.remove("open");
+
+  if(page==="calendar") renderCalendar();
+  if(page==="capsule") renderCapsules();
+  if(page==="settings") updateThemeButton();
+
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function renderAll(){
+  if(!appData) return;
+
+  $("heroDate").textContent=new Intl.DateTimeFormat("id-ID",{
+    weekday:"long",day:"numeric",month:"long",year:"numeric"
+  }).format(new Date());
+
+  $("statMemories").textContent=appData.memories.length;
+  $("statCompleted").textContent=appData.tasks.filter(t=>t.done).length;
+  $("statPending").textContent=appData.tasks.filter(t=>!t.done).length;
+  $("statCapsules").textContent=appData.capsules.length;
+
+  renderRecentMemories();
+  renderDashboardTasks();
+  renderMemories();
+  renderTasks();
+  renderCalendar();
+  renderCapsules();
+}
+
+function memoryEmoji(category){
+  return {
+    School:"📚",
+    Friends:"👭",
+    Family:"🏡",
+    Achievement:"🏆",
+    Personal:"🌷",
+    Other:"✨"
+  }[category] || "♡";
+}
+
+function photoMarkup(memory,cover=false){
+  if(memory.photo){
+    return `<img src="${esc(memory.photo)}" alt="Memory photo">`;
+  }
+  return cover ? memoryEmoji(memory.category) : memoryEmoji(memory.category);
+}
+
+function renderRecentMemories(){
+  const items=[...appData.memories]
+    .sort((a,b)=>(b.date||"").localeCompare(a.date||""))
+    .slice(0,4);
+
+  $("recentMemories").innerHTML=items.length ? items.map(m=>`
+    <article class="memory-item">
+      <div class="memory-thumb">${photoMarkup(m)}</div>
+      <div class="memory-content">
+        <h4>${esc(m.title)}</h4>
+        <p>${esc(m.story.slice(0,95))}${m.story.length>95?"…":""}</p>
+        <div class="memory-meta">
+          <span>${esc(formatDate(m.date))}</span>
+          <span>${esc(m.mood||"🤍")}</span>
+          <span class="badge purple">${esc(m.category)}</span>
+        </div>
+      </div>
+      <button class="small-action" data-view-memory="${esc(m.id)}" aria-label="Lihat kenangan">↗</button>
+    </article>
+  `).join("") : `
+    <div class="empty">
+      <div class="empty-icon">📖</div>
+      <h4>Your story starts here.</h4>
+      <p>Save your first little moment.</p>
+      <button class="primary-btn" data-add-memory>＋ Add Memory</button>
+    </div>
+  `;
+}
+
+function taskMarkup(task){
+  return `
+    <div class="task-item ${task.done?"done":""}">
+      <input class="task-check" type="checkbox"
+        data-toggle-task="${esc(task.id)}"
+        ${task.done?"checked":""}
+        aria-label="Tandai tugas selesai">
+      <div class="task-body">
+        <h4>${esc(task.title)}</h4>
+        <p>${esc(formatDate(task.date))}${task.priority==="High"?" · High priority":""}</p>
+      </div>
+      <button class="small-action" data-edit-task="${esc(task.id)}" aria-label="Edit tugas">⋯</button>
+    </div>
+  `;
+}
+
+function renderDashboardTasks(){
+  const items=appData.tasks
+    .filter(t=>!t.done && t.date===today())
+    .sort((a,b)=>(a.priority==="High"?-1:0)-(b.priority==="High"?-1:0))
+    .slice(0,5);
+
+  $("dashboardTasks").innerHTML=items.length
+    ?items.map(taskMarkup).join("")
+    :`
+      <div class="empty">
+        <div class="empty-icon">☁️</div>
+        <h4>A little breathing room.</h4>
+        <p>No unfinished tasks due today.</p>
+      </div>
+    `;
+}
+
+function renderMemories(){
+  const query=$("memorySearch").value.trim().toLowerCase();
+  const category=$("memoryCategoryFilter").value;
+
+  const items=[...appData.memories]
+    .filter(m=>{
+      const haystack=[
+        m.title,m.story,m.category,m.tags,m.date
+      ].join(" ").toLowerCase();
+
+      return (!query||haystack.includes(query)) &&
+             (!category||m.category===category);
+    })
+    .sort((a,b)=>{
+      if(a.favorite!==b.favorite) return a.favorite?-1:1;
+      return (b.date||"").localeCompare(a.date||"");
+    });
+
+  $("allMemories").innerHTML=items.length ? items.map(m=>`
+    <article class="memory-card">
+      <div class="memory-cover">
+        ${photoMarkup(m,true)}
+        <button class="favorite" data-favorite="${esc(m.id)}"
+          aria-label="Tandai favorit">${m.favorite?"♥":"♡"}</button>
+      </div>
+      <div class="memory-card-body">
+        <div style="display:flex;justify-content:space-between;gap:8px;align-items:center;margin-bottom:8px">
+          <span class="badge purple">${esc(m.category)}</span>
+          <span>${esc(m.mood||"🤍")}</span>
+        </div>
+        <h3>${esc(m.title)}</h3>
+        <p>${esc(m.story.slice(0,160))}${m.story.length>160?"…":""}</p>
+        ${m.tags?`<div class="memory-meta">${esc(m.tags)}</div>`:""}
+        <div class="memory-card-footer">
+          <span>${esc(formatDate(m.date))}</span>
+          <div class="memory-actions">
+            <button class="small-action" data-view-memory="${esc(m.id)}">Read</button>
+            <button class="small-action" data-edit-memory="${esc(m.id)}">Edit</button>
+            <button class="small-action" data-delete-memory="${esc(m.id)}">Delete</button>
+          </div>
+        </div>
+      </div>
+    </article>
+  `).join("") : `
+    <div class="empty" style="grid-column:1/-1">
+      <div class="empty-icon">🌷</div>
+      <h4>No memories found.</h4>
+      <p>Setiap kenangan berharga dimulai dari satu cerita.</p>
+      <button class="primary-btn" data-add-memory>＋ Save your first memory</button>
+    </div>
+  `;
+}
+
+function renderTasks(){
+  let items=[...appData.tasks];
+
+  if(taskFilter==="today") items=items.filter(t=>t.date===today());
+  if(taskFilter==="pending") items=items.filter(t=>!t.done);
+  if(taskFilter==="done") items=items.filter(t=>t.done);
+
+  items.sort((a,b)=>{
+    if(a.done!==b.done) return a.done?1:-1;
+    if(a.priority!==b.priority){
+      const rank={High:0,Normal:1,Low:2};
+      return rank[a.priority]-rank[b.priority];
+    }
+    return (a.date||"").localeCompare(b.date||"");
+  });
+
+  const total=appData.tasks.length;
+  const completed=appData.tasks.filter(t=>t.done).length;
+  const percent=total?Math.round(completed/total*100):0;
+
+  $("progressText").textContent=percent+"%";
+  $("progressBar").style.width=percent+"%";
+  $("taskCountText").textContent=`${items.length} task(s) shown · ${completed} completed`;
+
+  $("allTasks").innerHTML=items.length
+    ?items.map(t=>`
+      <div>
+        ${taskMarkup(t)}
+        <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:-5px;margin-bottom:12px">
+          ${t.priority==="High"?'<span class="badge red">High priority</span>':""}
+          ${t.priority==="Low"?'<span class="badge green">Low priority</span>':""}
+          <button class="text-btn" data-edit-task="${esc(t.id)}">Edit</button>
+          <button class="text-btn" data-delete-task="${esc(t.id)}">Delete</button>
+        </div>
+      </div>
+    `).join("")
+    :`
+      <div class="empty">
+        <div class="empty-icon">🌱</div>
+        <h4>Nothing here yet.</h4>
+        <p>Start small. Your future self will thank you.</p>
+        <button class="primary-btn" data-add-task>＋ Add a task</button>
+      </div>
+    `;
+}
+
+function renderCalendar(){
+  const year=calendarMonth.getFullYear();
+  const month=calendarMonth.getMonth();
+
+  $("calendarTitle").textContent=formatMonth(calendarMonth);
+
+  const first=new Date(year,month,1);
+  const startOffset=(first.getDay()+6)%7;
+  const daysInMonth=new Date(year,month+1,0).getDate();
+
+  const previousMonthDays=new Date(year,month,0).getDate();
+
+  const days=["Sen","Sel","Rab","Kam","Jum","Sab","Min"];
+
+  const memoryDates=new Set(appData.memories.map(m=>m.date));
+
+  let html=days.map(d=>`<div class="calendar-day-name">${d}</div>`).join("");
+
+  for(let i=0;i<42;i++){
+    let day,date,muted=false;
+
+    if(i<startOffset){
+      day=previousMonthDays-startOffset+i+1;
+      date=new Date(year,month-1,day);
+      muted=true;
+    }else if(i>=startOffset+daysInMonth){
+      day=i-(startOffset+daysInMonth)+1;
+      date=new Date(year,month+1,day);
+      muted=true;
+    }else{
+      day=i-startOffset+1;
+      date=new Date(year,month,day);
+    }
+
+    const iso=`${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,"0")}-${String(date.getDate()).padStart(2,"0")}`;
+
+    const classes=[
+      "calendar-day",
+      muted?"muted":"",
+      iso===today()?"today":"",
+      iso===selectedCalendarDate?"selected":"",
+      memoryDates.has(iso)?"has-memory":""
+    ].filter(Boolean).join(" ");
+
+    html+=`
+      <button class="${classes}" data-calendar-date="${iso}"
+        aria-label="${esc(formatDate(iso))}">
+        ${day}
+      </button>
+    `;
+  }
+
+  $("calendarGrid").innerHTML=html;
+  renderCalendarMemories();
+}
+
+function renderCalendarMemories(){
+  $("selectedDateTitle").textContent=formatDate(selectedCalendarDate);
+
+  const items=appData.memories
+    .filter(m=>m.date===selectedCalendarDate)
+    .sort((a,b)=>(b.createdAt||"").localeCompare(a.createdAt||""));
+
+  $("calendarMemories").innerHTML=items.length
+    ?items.map(m=>`
+      <article class="memory-item">
+        <div class="memory-thumb">${photoMarkup(m)}</div>
+        <div class="memory-content">
+          <h4>${esc(m.title)}</h4>
+          <p>${esc(m.story.slice(0,180))}${m.story.length>180?"…":""}</p>
+          <div class="memory-meta">
+            <span>${esc(m.category)}</span>
+            <span>${esc(m.mood||"🤍")}</span>
+          </div>
+          <button class="text-btn" style="margin-top:9px;padding:0"
+            data-view-memory="${esc(m.id)}">Read this memory →</button>
+        </div>
+      </article>
+    `).join("")
+    :`
+      <div class="empty">
+        <div class="empty-icon">🗓️</div>
+        <h4>A page waiting for a story.</h4>
+        <p>Tidak ada kenangan pada tanggal ini.</p>
+      </div>
+    `;
+}
+
+function renderCapsules(){
+  const items=[...appData.capsules]
+    .sort((a,b)=>(a.openDate||"").localeCompare(b.openDate||""));
+
+  $("allCapsules").innerHTML=items.length
+    ?items.map(c=>{
+      const available=c.openDate<=today();
+
+      return `
+        <article class="memory-item" style="margin-bottom:12px">
+          <div class="memory-thumb">✉</div>
+          <div class="memory-content">
+            <h4>${esc(c.title)}</h4>
+            <p>${available?"Your letter is ready to open.":"Waiting for "+formatDate(c.openDate)}</p>
+            <div class="memory-meta">
+              <span class="badge ${available?"green":"yellow"}">
+                ${available?"Ready to open":"Sealed for the future"}
+              </span>
+            </div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
+              ${available?`<button class="small-action" data-view-capsule="${esc(c.id)}">Open letter</button>`:""}
+              <button class="small-action" data-edit-capsule="${esc(c.id)}">Edit</button>
+              <button class="small-action" data-delete-capsule="${esc(c.id)}">Delete</button>
+            </div>
+          </div>
+        </article>
+      `;
+    }).join("")
+    :`
+      <div class="empty">
+        <div class="empty-icon">💌</div>
+        <h4>A letter for the future.</h4>
+        <p>Write something your future self should remember.</p>
+        <button class="primary-btn" data-add-capsule>＋ Write a letter</button>
+      </div>
+    `;
+}
+
+function resetMemoryForm(){
+  $("memoryForm").reset();
+  $("memoryId").value="";
+  $("memoryDate").value=today();
+  $("memoryModalTitle").textContent="Save a Memory ♡";
+}
+
+function editMemory(id){
+  const m=appData.memories.find(x=>x.id===id);
+  if(!m) return;
+
+  $("memoryForm").reset();
+  $("memoryId").value=m.id;
+  $("memoryTitle").value=m.title;
+  $("memoryDate").value=m.date;
+  $("memoryCategory").value=m.category;
+  $("memoryMood").value=m.mood||"🤍";
+  $("memoryStory").value=m.story;
+  $("memoryTags").value=m.tags||"";
+  $("memoryFavorite").checked=!!m.favorite;
+  $("memoryModalTitle").textContent="Edit Memory";
+
+  openModal("memoryModal");
+}
+
+function addMemory(date=today()){
+  resetMemoryForm();
+  $("memoryDate").value=date;
+  openModal("memoryModal");
+}
+
+function resetTaskForm(){
+  $("taskForm").reset();
+  $("taskId").value="";
+  $("taskDate").value=today();
+  $("taskModalTitle").textContent="Add a Task";
+}
+
+function editTask(id){
+  const t=appData.tasks.find(x=>x.id===id);
+  if(!t) return;
+
+  $("taskId").value=t.id;
+  $("taskTitle").value=t.title;
+  $("taskDate").value=t.date;
+  $("taskPriority").value=t.priority;
+  $("taskNotes").value=t.notes||"";
+  $("taskModalTitle").textContent="Edit Task";
+
+  openModal("taskModal");
+}
+
+function addTask(){
+  resetTaskForm();
+  openModal("taskModal");
+}
+
+function addCapsule(){
+  $("capsuleForm").reset();
+  $("capsuleId").value="";
+  $("capsuleDate").value=`${new Date().getFullYear()+1}-01-01`;
+  openModal("capsuleModal");
+}
+
+function editCapsule(id){
+  const c=appData.capsules.find(x=>x.id===id);
+  if(!c) return;
+
+  $("capsuleId").value=c.id;
+  $("capsuleTitle").value=c.title;
+  $("capsuleDate").value=c.openDate;
+  $("capsuleStory").value=c.story;
+  openModal("capsuleModal");
+}
+
+async function readImage(file){
+  if(!file) return null;
+
+  if(!file.type.startsWith("image/")){
+    throw new Error("File harus berupa gambar.");
+  }
+
+  if(file.size>2*1024*1024){
+    throw new Error("Ukuran gambar maksimal 2 MB. Kompres gambar terlebih dahulu.");
+  }
+
+  return new Promise((resolve,reject)=>{
+    const reader=new FileReader();
+    reader.onload=()=>resolve(reader.result);
+    reader.onerror=()=>reject(new Error("Gambar gagal dibaca."));
+    reader.readAsDataURL(file);
+  });
+}
+
+$("memoryForm").addEventListener("submit",async event=>{
+  event.preventDefault();
+
+  const id=$("memoryId").value;
+  const existing=appData.memories.find(m=>m.id===id);
+  const file=$("memoryPhoto").files[0];
+
+  let photo=existing?.photo||null;
+
+  try{
+    if(file) photo=await readImage(file);
+  }catch(error){
+    toast(error.message);
+    return;
+  }
+
+  const memory={
+    id:id||uid(),
+    title:$("memoryTitle").value.trim(),
+    date:$("memoryDate").value,
+    category:$("memoryCategory").value,
+    mood:$("memoryMood").value,
+    story:$("memoryStory").value.trim(),
+    tags:$("memoryTags").value.trim(),
+    favorite:$("memoryFavorite").checked,
+    photo,
+    createdAt:existing?.createdAt||new Date().toISOString(),
+    updatedAt:new Date().toISOString()
+  };
+
+  if(!memory.title||!memory.story||!memory.date){
+    toast("Lengkapi judul, tanggal, dan cerita.");
+    return;
+  }
+
+  if(existing){
+    appData.memories=appData.memories.map(m=>m.id===id?memory:m);
+  }else{
+    appData.memories.push(memory);
+  }
+
+  closeModal("memoryModal");
+  renderAll();
+
+  if(await saveNow()) toast("Your memory has been saved ♡");
+});
+
+$("taskForm").addEventListener("submit",async event=>{
+  event.preventDefault();
+
+  const id=$("taskId").value;
+  const existing=appData.tasks.find(t=>t.id===id);
+
+  const task={
+    id:id||uid(),
+    title:$("taskTitle").value.trim(),
+    date:$("taskDate").value,
+    priority:$("taskPriority").value,
+    notes:$("taskNotes").value.trim(),
+    done:existing?.done||false,
+    completedAt:existing?.completedAt||null,
+    createdAt:existing?.createdAt||new Date().toISOString(),
+    updatedAt:new Date().toISOString()
+  };
+
+  if(!task.title||!task.date){
+    toast("Isi nama tugas dan tanggalnya.");
+    return;
+  }
+
+  if(existing){
+    appData.tasks=appData.tasks.map(t=>t.id===id?task:t);
+  }else{
+    appData.tasks.push(task);
+  }
+
+  closeModal("taskModal");
+  renderAll();
+
+  if(await saveNow()) toast("Task saved successfully ✓");
+});
+
+$("capsuleForm").addEventListener("submit",async event=>{
+  event.preventDefault();
+
+  const id=$("capsuleId").value;
+  const existing=appData.capsules.find(c=>c.id===id);
+
+  const capsule={
+    id:id||uid(),
+    title:$("capsuleTitle").value.trim(),
+    openDate:$("capsuleDate").value,
+    story:$("capsuleStory").value.trim(),
+    createdAt:existing?.createdAt||new Date().toISOString(),
+    updatedAt:new Date().toISOString()
+  };
+
+  if(!capsule.title||!capsule.openDate||!capsule.story){
+    toast("Lengkapi semua bagian surat.");
+    return;
+  }
+
+  if(existing){
+    appData.capsules=appData.capsules.map(c=>c.id===id?capsule:c);
+  }else{
+    appData.capsules.push(capsule);
+  }
+
+  closeModal("capsuleModal");
+  renderAll();
+
+  if(await saveNow()) toast("Letter saved for your future self ✉");
+});
+
+async function toggleTask(id){
+  const task=appData.tasks.find(t=>t.id===id);
+  if(!task) return;
+
+  task.done=!task.done;
+  task.completedAt=task.done?new Date().toISOString():null;
+  task.updatedAt=new Date().toISOString();
+
+  renderAll();
+  await saveNow();
+}
+
+async function toggleFavorite(id){
+  const memory=appData.memories.find(m=>m.id===id);
+  if(!memory) return;
+
+  memory.favorite=!memory.favorite;
+  renderAll();
+  await saveNow();
+}
+
+async function deleteMemory(id){
+  const memory=appData.memories.find(m=>m.id===id);
+  if(!memory) return;
+
+  if(!confirm(`Hapus kenangan "${memory.title}"? Tindakan ini tidak dapat dibatalkan.`)) return;
+
+  appData.memories=appData.memories.filter(m=>m.id!==id);
+  renderAll();
+  if(await saveNow()) toast("Memory deleted.");
+}
+
+async function deleteTask(id){
+  const task=appData.tasks.find(t=>t.id===id);
+  if(!task) return;
+
+  if(!confirm(`Hapus tugas "${task.title}"?`)) return;
+
+  appData.tasks=appData.tasks.filter(t=>t.id!==id);
+  renderAll();
+  if(await saveNow()) toast("Task deleted.");
+}
+
+async function deleteCapsule(id){
+  const capsule=appData.capsules.find(c=>c.id===id);
+  if(!capsule) return;
+
+  if(!confirm(`Hapus surat "${capsule.title}"?`)) return;
+
+  appData.capsules=appData.capsules.filter(c=>c.id!==id);
+  renderAll();
+  if(await saveNow()) toast("Letter deleted.");
+}
+
+function viewMemory(id){
+  const m=appData.memories.find(x=>x.id===id);
+  if(!m) return;
+
+  $("detailTitle").textContent=m.title;
+  $("detailMeta").textContent=
+    `${formatDate(m.date)} · ${m.category} · ${m.mood||"🤍"}`;
+
+  $("detailBody").innerHTML=`
+    ${m.photo?`<img class="detail-photo" src="${esc(m.photo)}" alt="Memory photo">`:""}
+    <div class="detail-content">${esc(m.story)}</div>
+    ${m.tags?`<p class="muted" style="margin-top:18px">Tags: ${esc(m.tags)}</p>`:""}
+    ${m.favorite?'<p class="badge purple" style="margin-top:10px">♥ Favorite memory</p>':""}
+    <div class="modal-actions">
+      <button class="secondary-btn" id="detailEditMemory">Edit memory</button>
+    </div>
+  `;
+
+  openModal("detailModal");
+
+  $("detailEditMemory").addEventListener("click",()=>{
+    closeModal("detailModal");
+    editMemory(id);
+  });
+}
+
+function viewCapsule(id){
+  const c=appData.capsules.find(x=>x.id===id);
+  if(!c) return;
+
+  if(c.openDate>today()){
+    toast("Surat ini belum siap dibuka. Tunggu sampai tanggalnya tiba.");
+    return;
+  }
+
+  $("detailTitle").textContent=c.title;
+  $("detailMeta").textContent=`Your letter · Written for ${formatDate(c.openDate)}`;
+  $("detailBody").innerHTML=`
+    <div class="detail-content">${esc(c.story)}</div>
+    <p class="muted" style="margin-top:18px;font-size:11px">
+      A message from an earlier version of you. ♡
+    </p>
+  `;
+
+  openModal("detailModal");
+}
+
+async function exportBackup(){
+  try{
+    await saving;
+
+    const record=await readVault();
+    if(!record) throw new Error("Database tidak ditemukan.");
+
+    const backup={
+      application:"Memories of high school life",
+      backupVersion:1,
+      exportedAt:new Date().toISOString(),
+      encryptedVault:{
+        salt:record.salt,
+        encrypted:record.encrypted
+      }
+    };
+
+    const blob=new Blob(
+      [JSON.stringify(backup,null,2)],
+      {type:"application/json"}
+    );
+
+    const url=URL.createObjectURL(blob);
+    const link=document.createElement("a");
+    link.href=url;
+    link.download=`memories-backup-${today()}.json`;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+
+    setTimeout(()=>URL.revokeObjectURL(url),30000);
+    toast("Encrypted backup exported. Simpan dengan aman.");
+  }catch(error){
+    console.error(error);
+    toast("Backup gagal dibuat.");
+  }
+}
+
+function importBackup(){
+  $("importFile").value="";
+  $("importFile").click();
+}
+
+$("importFile").addEventListener("change",async event=>{
+  const file=event.target.files[0];
+  if(!file) return;
+
+  if(!confirm(
+    "Memulihkan cadangan akan MENGGANTI semua data yang sekarang tersimpan. " +
+    "Ekspor cadangan data saat ini terlebih dahulu. Lanjutkan?"
+  )) return;
+
+  let backup;
+
+  try{
+    const text=await file.text();
+
+    if(text.length>100*1024*1024){
+      throw new Error("File cadangan terlalu besar.");
+    }
+
+    backup=JSON.parse(text);
+
+    if(backup.application!=="Memories of high school life" ||
+       backup.backupVersion!==1 ||
+       !backup.encryptedVault?.salt ||
+       !backup.encryptedVault?.encrypted){
+      throw new Error("Format backup tidak valid.");
+    }
+
+    const pin=prompt("Masukkan PIN yang digunakan saat backup dibuat:");
+    if(pin===null) return;
+
+    const key=await deriveKey(
+      pin,
+      base64ToBytes(backup.encryptedVault.salt)
+    );
+
+    const restored=await decryptData(
+      backup.encryptedVault.encrypted,key
+    );
+
+    if(!restored ||
+       !Array.isArray(restored.memories) ||
+       !Array.isArray(restored.tasks) ||
+       !Array.isArray(restored.capsules)){
+      throw new Error("Struktur data backup tidak valid.");
+    }
+
+    const confirmed=confirm(
+      `Backup berhasil dibuka.\n\n`+
+      `Kenangan: ${restored.memories.length}\n`+
+      `Tugas: ${restored.tasks.length}\n`+
+      `Surat: ${restored.capsules.length}\n\n`+
+      `Ganti semua data sekarang dengan isi backup ini?`
+    );
+
+    if(!confirmed) return;
+
+    const newSalt=base64ToBytes(backup.encryptedVault.salt);
+    const encrypted=await encryptData(restored,key);
+
+    await writeVault({
+      id:VAULT_KEY,
+      salt:bytesToBase64(newSalt),
+      encrypted,
+      updatedAt:new Date().toISOString()
+    });
+
+    currentSalt=bytesToBase64(newSalt);
+    masterKey=key;
+    appData=restored;
+
+    renderAll();
+    toast("Backup restored successfully.");
+  }catch(error){
+    console.error(error);
+    toast("Backup gagal dibuka. Periksa file dan PIN.");
+  }
+});
+
+$("pinForm").addEventListener("submit",async event=>{
+  event.preventDefault();
+
+  const oldPin=$("oldPin").value;
+  const newPin=$("newPin").value;
+  const confirmPin=$("confirmPin").value;
+
+  if(!/^[0-9]{6,}$/.test(newPin)){
+    toast("PIN baru harus terdiri dari minimal 6 angka.");
+    return;
+  }
+
+  if(newPin!==confirmPin){
+    toast("Konfirmasi PIN tidak cocok.");
+    return;
+  }
+
+  if(oldPin===newPin){
+    toast("Gunakan PIN yang berbeda dari PIN lama.");
+    return;
+  }
+
+  const valid=await unlockVault(oldPin);
+
+  if(!valid){
+    toast("PIN lama salah.");
+    return;
+  }
+
+  try{
+    const salt=randomBytes(16);
+    const newKey=await deriveKey(newPin,salt);
+    const encrypted=await encryptData(appData,newKey);
+
+    await writeVault({
+      id:VAULT_KEY,
+      salt:bytesToBase64(salt),
+      encrypted,
+      updatedAt:new Date().toISOString()
+    });
+
+    currentSalt=bytesToBase64(salt);
+    masterKey=newKey;
+
+    $("pinForm").reset();
+    closeModal("pinModal");
+    toast("PIN updated. Your data has been re-encrypted.");
+  }catch(error){
+    console.error(error);
+    toast("PIN gagal diperbarui.");
+  }
+});
+
+async function toggleTheme(){
+  const dark=!document.body.classList.contains("dark");
+
+  document.body.classList.toggle("dark",dark);
+
+  if(appData){
+    appData.settings.theme=dark?"dark":"light";
+    await saveNow();
+  }
+
+  updateThemeButton();
+}
+
+function showMemoryDetailFromEvent(id){
+  if(id) viewMemory(id);
+}
+
+document.addEventListener("click",async event=>{
+  const target=event.target.closest("button");
+  if(!target) return;
+
+  if(target.dataset.page){
+    switchPage(target.dataset.page);
+    return;
+  }
+
+  if(target.dataset.go){
+    switchPage(target.dataset.go);
+    return;
+  }
+
+  if(target.dataset.close){
+    closeModal(target.dataset.close);
+    return;
+  }
+
+  if(target.dataset.addMemory!==undefined){
+    addMemory();
+    return;
+  }
+
+  if(target.dataset.addTask!==undefined){
+    addTask();
+    return;
+  }
+
+  if(target.dataset.addCapsule!==undefined){
+    addCapsule();
+    return;
+  }
+
+  if(target.dataset.viewMemory){
+    showMemoryDetailFromEvent(target.dataset.viewMemory);
+    return;
+  }
+
+  if(target.dataset.editMemory){
+    editMemory(target.dataset.editMemory);
+    return;
+  }
+
+  if(target.dataset.deleteMemory){
+    await deleteMemory(target.dataset.deleteMemory);
+    return;
+  }
+
+  if(target.dataset.favorite){
+    await toggleFavorite(target.dataset.favorite);
+    return;
+  }
+
+  if(target.dataset.toggleTask){
+    await toggleTask(target.dataset.toggleTask);
+    return;
+  }
+
+  if(target.dataset.editTask){
+    editTask(target.dataset.editTask);
+    return;
+  }
+
+  if(target.dataset.deleteTask){
+    await deleteTask(target.dataset.deleteTask);
+    return;
+  }
+
+  if(target.dataset.viewCapsule){
+    viewCapsule(target.dataset.viewCapsule);
+    return;
+  }
+
+  if(target.dataset.editCapsule){
+    editCapsule(target.dataset.editCapsule);
+    return;
+  }
+
+  if(target.dataset.deleteCapsule){
+    await deleteCapsule(target.dataset.deleteCapsule);
+    return;
+  }
+
+  if(target.dataset.calendarDate){
+    selectedCalendarDate=target.dataset.calendarDate;
+    const d=new Date(selectedCalendarDate+"T12:00:00");
+    calendarMonth=new Date(d.getFullYear(),d.getMonth(),1);
+    renderCalendar();
+    return;
+  }
+
+  if(target.dataset.filter){
+    taskFilter=target.dataset.filter;
+
+    document.querySelectorAll("#taskFilters button").forEach(button=>{
+      button.classList.toggle("active",button===target);
+    });
+
+    renderTasks();
+    return;
+  }
+});
+
+$("menuButton").addEventListener("click",()=>{
+  $("sidebar").classList.toggle("open");
+});
+
+$("themeButton").addEventListener("click",toggleTheme);
+$("settingsTheme").addEventListener("click",toggleTheme);
+
+$("quickAdd").addEventListener("click",()=>addMemory());
+$("heroAdd").addEventListener("click",()=>addMemory());
+$("addMemoryButton").addEventListener("click",()=>addMemory());
+$("dashboardAddTask").addEventListener("click",addTask);
+$("addTaskButton").addEventListener("click",addTask);
+$("addCapsuleButton").addEventListener("click",addCapsule);
+$("addCalendarMemory").addEventListener("click",()=>{
+  addMemory(selectedCalendarDate);
+});
+
+$("prevMonth").addEventListener("click",()=>{
+  calendarMonth=new Date(
+    calendarMonth.getFullYear(),
+    calendarMonth.getMonth()-1,
+    1
+  );
+  renderCalendar();
+});
+
+$("nextMonth").addEventListener("click",()=>{
+  calendarMonth=new Date(
+    calendarMonth.getFullYear(),
+    calendarMonth.getMonth()+1,
+    1
+  );
+  renderCalendar();
+});
+
+$("memorySearch").addEventListener("input",renderMemories);
+$("memoryCategoryFilter").addEventListener("change",renderMemories);
+
+$("exportButton").addEventListener("click",exportBackup);
+$("importButton").addEventListener("click",importBackup);
+
+$("changePinButton").addEventListener("click",()=>{
+  $("pinForm").reset();
+  openModal("pinModal");
+});
+
+$("lockButton").addEventListener("click",lockApp);
+
+document.querySelectorAll(".modal-backdrop").forEach(backdrop=>{
+  backdrop.addEventListener("click",event=>{
+    if(event.target===backdrop) closeModal(backdrop.id);
+  });
+});
+
+document.addEventListener("keydown",event=>{
+  if(event.key==="Escape"){
+    document.querySelectorAll(".modal-backdrop.open").forEach(modal=>{
+      closeModal(modal.id);
+    });
+    $("sidebar").classList.remove("open");
+  }
+});
+
+/* INITIALIZATION */
+
+async function initialize(){
+  $("heroDate").textContent=formatDate(today());
+
+  if(!window.crypto?.subtle){
+    $("lockDescription").textContent=
+      "Browser ini tidak menyediakan enkripsi yang diperlukan. " +
+      "Buka website melalui HTTPS atau browser yang mendukung Web Crypto.";
+    $("unlockButton").disabled=true;
+    $("lockMessage").hidden=false;
+    $("lockMessage").textContent="Enkripsi tidak tersedia di konteks ini.";
+    return;
+  }
+
+  try{
+    db=await openDB();
+
+    const record=await readVault();
+
+    if(!record){
+      $("lockDescription").textContent=
+        "Buat PIN minimal 6 angka untuk mengenkripsi kenanganmu. " +
+        "Jangan sampai lupa PIN karena tidak ada fitur reset.";
+      $("unlockButton").textContent="Create my private space ♡";
+      $("pinInput").setAttribute("minlength","6");
+    }else{
+      currentSalt=record.salt;
+      $("lockDescription").textContent=
+        "Masukkan PIN untuk membuka kenanganmu.";
+      $("unlockButton").textContent="Buka Kenangan →";
+    }
+  }catch(error){
+    console.error(error);
+    $("lockDescription").textContent=
+      "Penyimpanan tidak tersedia. Coba buka melalui HTTPS atau browser lain.";
+    $("unlockButton").disabled=true;
+    $("lockMessage").hidden=false;
+    $("lockMessage").textContent="Database tidak dapat diakses.";
+  }
+}
+
+$("unlockForm").addEventListener("submit",async event=>{
+  event.preventDefault();
+
+  const pin=$("pinInput").value;
+
+  if(!pin){
+    $("lockMessage").hidden=false;
+    $("lockMessage").textContent="Masukkan PIN terlebih dahulu.";
+    return;
+  }
+
+  $("unlockButton").disabled=true;
+  $("lockMessage").hidden=true;
+
+  try{
+    const record=await readVault();
+
+    if(!record){
+      if(!/^[0-9]{6,}$/.test(pin)){
+        throw new Error("Buat PIN minimal 6 angka.");
+      }
+
+      await createInitialVault(pin);
+
+      const saved=await readVault();
+      currentSalt=saved.salt;
+      showApp();
+
+      toast("Private space created successfully ♡");
+    }else{
+      const success=await unlockVault(pin);
+
+      if(!success){
+        throw new Error("PIN salah atau data tidak dapat dibuka.");
+      }
+
+      const saved=await readVault();
+      currentSalt=saved.salt;
+
+      showApp();
+      toast("Welcome back to your memories ♡");
+    }
+  }catch(error){
+    $("lockMessage").hidden=false;
+    $("lockMessage").textContent=error.message||"Terjadi kesalahan.";
+  }finally{
+    $("unlockButton").disabled=false;
+  }
+});
+
+initialize();
+</script>
+</body>
+</html>
